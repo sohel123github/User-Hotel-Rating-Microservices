@@ -1,0 +1,44 @@
+package com.ratingservice.service;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.ratingservice.dao.RatingRepository;
+import com.ratingservice.entity.Rating;
+import com.ratingservice.service.exception.ResourceNotFoundException;
+
+@Service
+public class RatingServiceImpl implements RatingService{
+
+	@Autowired
+	private RatingRepository ratingRepository;
+	
+	@Override
+	public List<Rating> getAll() {
+		List<Rating> ratingList = ratingRepository.findAll();
+		return ratingList;
+	}
+
+	@Override
+	public Rating get(String ratingId) {
+		ratingRepository.findById(ratingId).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found.."));
+		return null;
+	}
+
+	@Override
+	public Rating upsert(Rating rating) {
+		String randomRatingId = UUID.randomUUID().toString();
+		rating.setRatingId(randomRatingId);
+		ratingRepository.save(rating);
+		return rating;
+	}
+
+	@Override
+	public String delete(String ratingId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

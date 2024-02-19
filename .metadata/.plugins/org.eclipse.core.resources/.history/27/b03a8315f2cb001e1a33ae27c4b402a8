@@ -1,0 +1,5 @@
+package com.ratingservice.service.exception.payload;
+
+public class ApiResponse {
+
+}

@@ -1,0 +1,38 @@
+package com.userservice.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.userservice.dao.UserRepository;
+import com.userservice.entity.User;
+import com.userservice.exception.ResourceNotFoundException;
+
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	public List<User> getAll() {
+		List<User> listOfUsers = userRepository.findAll();
+		return listOfUsers;
+	}
+
+	@Override
+	public User get(int userId) {
+		User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
+		return user;
+	}
+
+	@Override
+	public User upsert(User u) {
+		User user = userRepository.save(u);
+		return user;
+	}
+
+	@Override
+	public String delete(int userId) {
+		userRepository.deleteById(userId);
+		return "deleted successfully..";
+	}
+
+}

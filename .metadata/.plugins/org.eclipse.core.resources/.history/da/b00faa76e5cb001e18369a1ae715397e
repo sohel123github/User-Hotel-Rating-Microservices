@@ -1,0 +1,5 @@
+package com.hotelservice.service.exception.payload;
+
+public class ApiResponse {
+
+}

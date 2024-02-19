@@ -1,0 +1,46 @@
+package com.hotelservice.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.hotelservice.dao.HotelRepository;
+import com.hotelservice.entity.Hotel;
+import com.hotelservice.service.exception.ResourceNotFoundException;
+
+@Service
+public class HotelServiceImpl implements HotelService{
+
+	@Autowired
+	private HotelRepository hotelRepository;
+	
+	@Override
+	public List<Hotel> getAll() {
+		List<Hotel> hotelList = hotelRepository.findAll();
+		return hotelList;
+	}
+
+	@Override
+	public Hotel get(String hotelId) {
+		Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(() -> new ResourceNotFoundException ("Resource Not Found.."));
+		return hotel;
+	}
+
+	@Override
+	public Hotel updateHotel(Hotel h) {
+		Hotel hotel = hotelRepository.save(h);
+		return hotel;
+	}
+
+	@Override
+	public Hotel createHotel(Hotel h) {
+		Hotel hotel = hotelRepository.save(h);
+		return hotel;
+	}
+
+	@Override
+	public String deleteHotel(String hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
