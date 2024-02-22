@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -59,12 +58,15 @@ public class ServiceMockitoTest {
 		String userId = "sbsa1";
 		
 		when(userRepository.findById(userId)).thenReturn(Optional.of(user));  //Mocking
+
+		when(restTemplate.getForObject("http://RATING-SERVICE/ratings/users/sbsa1", Rating[].class)).thenReturn(ratingList);
 		
-		when(restTemplate.getForObject(any(), eq(Rating[].class))).thenReturn(ratingList);
-		
-//		when(restTemplate.getForEntity(any(), null))
-		
-		assertEquals(userId,userServiceImpl.get(userId).getUserId());
+		when(restTemplate.getForObject("http://HOTEL-SERVICE/hotels/saeo3", Hotel.class)).thenReturn(hotel);
+
+		User userResponse = userServiceImpl.get(userId);
+
+		assertEquals(userId, userResponse.getUserId());
+		assertEquals(hotel.getHotelId(), userResponse.getRatings().get(0).getHotel().getHotelId());
 	}
 
 //	@Test
