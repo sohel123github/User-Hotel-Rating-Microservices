@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
-import jakarta.transaction.TransactionScoped;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +30,7 @@ public class User {
 	private String about;
 	
 	@Transient
-	private List<Rating> rating = new ArrayList<>();
+	private List<Rating> ratings = new ArrayList<>();
 
 	public User(String userId, String name, String email, String about) {
 		super();
