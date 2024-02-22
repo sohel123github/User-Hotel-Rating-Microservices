@@ -1,0 +1,37 @@
+package com.userservice;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import com.userservice.dao.UserRepository;
+import com.userservice.entity.User;
+import com.userservice.service.UserServiceImpl;
+
+@SpringBootTest(classes = {ServiceMockitoTest.class})
+public class ServiceMockitoTest {
+
+	@Mock
+	UserRepository userRepository;
+	
+	@InjectMocks
+	UserServiceImpl userServiceImpl;
+	
+	List<User> myUsers;
+	
+	@Test
+	@Order(1)
+	public void test_getAll () {
+		List<User> myUsers = new ArrayList<>();
+		myUsers.add(new User(1,"Abhay","abhay@gmail.com","java developer"));
+		
+		
+//		userRepository.findAll()
+//		UserService.getAll();
+	}
+	
+	
+}

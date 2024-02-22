@@ -1,5 +1,0 @@
-package com.userservice.exception.payload;
-
-public class ApiResponse {
-
-}

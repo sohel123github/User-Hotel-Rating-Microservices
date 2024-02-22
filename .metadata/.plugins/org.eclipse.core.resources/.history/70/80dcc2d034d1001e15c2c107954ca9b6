@@ -1,0 +1,74 @@
+package com.userservice;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import com.userservice.dao.UserRepository;
+import com.userservice.entity.User;
+import com.userservice.service.UserServiceImpl;
+
+@SpringBootTest(classes = {ServiceMockitoTest.class})
+public class ServiceMockitoTest {
+
+	@Mock
+	UserRepository userRepository;
+	
+	@InjectMocks
+	UserServiceImpl userServiceImpl;
+	
+	List<User> myUsers;
+	
+	@Test
+	@Order(1)
+	public void test_getAll () {
+		List<User> myUsers = new ArrayList<>();
+		myUsers.add(new User("sbsa1","Abhay","abhay@gmmail.com","Java developer"));
+		myUsers.add(new User("jfds2","Raj","raj@gmmail.com","Python developer"));
+		
+		when(userRepository.findAll()).thenReturn(myUsers); //Mocking
+		
+		assertEquals(2,userServiceImpl.getAll().size());
+	
+	}
+
+	@Test
+	@Order(2)
+	public void test_get() {
+		List<User> myUsers = new ArrayList<>();
+		myUsers.add(new User("sbsa1","Abhay","abhay@gmmail.com","Java developer"));
+		myUsers.add(new User("jfds2","Raj","raj@gmmail.com","Python developer"));
+		
+		
+	}
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

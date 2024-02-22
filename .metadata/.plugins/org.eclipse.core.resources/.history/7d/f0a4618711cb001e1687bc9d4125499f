@@ -1,5 +1,0 @@
-package com.userservice.dao;
-
-public interface UserRepository {
-
-}
